@@ -4,6 +4,6 @@
     "http-server": "^14.1.1"
   },
   "scripts": {
-    "build-watch": "tailwindcss -i ./docs/style.css -o ./docs/output.css --watch"
+    "build-watch": "tailwindcss -i ./src/style.css -o ./src/output.css --watch"
   }
 }
