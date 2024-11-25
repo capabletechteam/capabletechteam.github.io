@@ -1,0 +1,5 @@
+/* TailwindCSS in this file: actual outputted CSS should go to output.css */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
