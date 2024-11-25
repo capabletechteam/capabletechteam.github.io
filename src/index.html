@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html>
   <!--
-    This isn't vanilla HTML!
-    1. Run npm i
-    2. In one terminal, run npm run build-watch
-    3. Then visit the website using one or another method (eg. npx http-server which is preinstalled)
+    NOTE for devs: Without Tailwind, this site will seem funny!
+    -> See README.md for more details.
   -->
   <head>
     <link href="output.css" rel="stylesheet" type="text/css">
+    <!-- Inter font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
     <meta name="charset" content="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="keywords" content="tech, team">
@@ -16,8 +18,9 @@
   </head>
 
   <body>
-    <main class="container mx-auto px-4 mt-1">
+    <main class="container mx-auto px-4 mt-1 font-inter">
       <h1 class="text-3xl">The Tech Team website!</h1>
+      <p>Stuff goes here...</p>
     </main>
   </body>
   
