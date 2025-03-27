@@ -28,17 +28,31 @@ jobs:
       - name: Build Site
         run: npm run build
 
-      # Deploy to GitHub Pages
-      - name: Deploy to GitHub Pages
-        uses: actions/upload-pages-artifact@latest
+      # Upload the build artifacts
+      - name: Upload Build Artifacts
+        uses: actions/upload-artifact@v3
         with:
+          name: build
           path: ./dist
 
   deploy:
     runs-on: ubuntu-latest
     needs: build
+
     steps:
-      # Deploy the artifact to GitHub Pages
-      - name: Deploy to Pages
-        id: pages
-        uses: actions/deploy-pages@v1
+      # Checkout the repository
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      # Download the build artifacts
+      - name: Download Build Artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: build
+          path: ./dist
+
+      # Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v2
+        with:
+          path: ./dist
