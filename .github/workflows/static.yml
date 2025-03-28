@@ -68,3 +68,5 @@ jobs:
           publish_dir: ./artifact/build  # Ensure this points to the extracted build directory
           debug: true  # Enable debugging
           timeout: 15m  # Increase timeout
+          max_attempts: 3  # Retry up to 3 times
+          delay: 30s  # 30 seconds delay between retries
