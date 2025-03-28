@@ -54,12 +54,16 @@ jobs:
             exit 1
           fi
 
+      # Compress the build artifacts
+      - name: Compress Build Artifacts
+        run: tar -czf build.tar.gz ./build/
+
       # Upload the build artifacts
-      - name: Upload Build Artifacts
+      - name: Upload Compressed Artifacts
         uses: actions/upload-artifact@v4
         with:
           name: github-pages
-          path: ./build/
+          path: build.tar.gz
 
   deploy:
     needs: go
