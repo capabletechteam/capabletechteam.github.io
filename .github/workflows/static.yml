@@ -32,6 +32,16 @@ jobs:
       - name: Build Site
         run: npm run build
 
+      # Check build artifact size
+      - name: Check Artifact Size
+        run: |
+          ARTIFACT_SIZE=$(du -sh ./build/ | cut -f1)
+          echo "Artifact size: $ARTIFACT_SIZE"
+          if [ $(du -sb ./build/ | cut -f1) -ge 10000000000 ]; then
+            echo "Build artifact size exceeds the limit of 10GB."
+            exit 1
+          fi
+
       # Upload the build artifacts
       - name: Upload Build Artifacts
         uses: actions/upload-artifact@v4
@@ -41,17 +51,15 @@ jobs:
 
   deploy:
     needs: go
-        # Deploy to the github-pages environment
     environment:
-        name: github-pages
-        url: ${{ steps.deployment.outputs.page_url }}
-        # Specify runner + deployment step
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-     # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
     permissions:
-        pages: write      # to deploy to Pages
-        id-token: write   # to verify the deployment originates from an appropriate source
+      pages: write      # to deploy to Pages
+      id-token: write   # to verify the deployment originates from an appropriate source
+
     steps:
-        - name: Deploy to GitHub Pages
-          id: deployment
-          uses: actions/deploy-pages@v4 # or specific "vX.X.X" version tag for this action
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
