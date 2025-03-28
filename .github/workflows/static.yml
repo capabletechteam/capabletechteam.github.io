@@ -32,6 +32,18 @@ jobs:
       - name: Build Site
         run: npm run build
 
+      # Check for hard links and symlinks
+      - name: Check for Hard Links and Symlinks
+        run: |
+          if find ./build/ -type l | read; then
+            echo "Symlinks detected in the build artifact."
+            exit 1
+          fi
+          if find ./build/ -type f -links +1 | read; then
+            echo "Hard links detected in the build artifact."
+            exit 1
+          fi
+
       # Check build artifact size
       - name: Check Artifact Size
         run: |
