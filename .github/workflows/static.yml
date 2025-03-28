@@ -41,11 +41,7 @@ jobs:
 
   deploy:
     runs-on: ubuntu-latest
-    needs: build
-    
-    permissions:
-      pages: write      # to deploy to Pages
-      id-token: write 
+    needs: build 
 
     steps:
       # Checkout the repository
@@ -62,3 +58,5 @@ jobs:
       # Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
