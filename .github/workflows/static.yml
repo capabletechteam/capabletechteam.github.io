@@ -8,31 +8,27 @@ on:
 permissions:
   contents: read
   id-token: write
+  pages: write  # Added permission
 
 jobs:
   go:
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout the repository
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      # Set up Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '18'
 
-      # Install dependencies
       - name: Install Dependencies
         run: npm install
 
-      # Build the site
       - name: Build Site
         run: npm run build
 
-      # Check for hard links and symlinks
       - name: Check for Hard Links and Symlinks
         run: |
           if find ./build/ -type l | read; then
@@ -44,7 +40,6 @@ jobs:
             exit 1
           fi
 
-      # Check build artifact size
       - name: Check Artifact Size
         run: |
           ARTIFACT_SIZE=$(du -sh ./build/ | cut -f1)
@@ -52,13 +47,10 @@ jobs:
           if [ $(du -sb ./build/ | cut -f1) -ge 10000000000 ]; then
             echo "Build artifact size exceeds the limit of 10GB."
             exit 1
-          fi
 
-      # Compress the build artifacts
       - name: Compress Build Artifacts
         run: tar -czf build.tar.gz ./build/
 
-      # Upload the build artifacts
       - name: Upload Compressed Artifacts
         uses: actions/upload-artifact@v4
         with:
@@ -72,10 +64,26 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     permissions:
-      pages: write     
-      id-token: write   
+      pages: write
+      id-token: write
 
     steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Download Artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: github-pages
+          path: ./artifact
+
+      - name: Extract Artifact
+        run: tar -xzf ./artifact/build.tar.gz -C ./artifact
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+        with:
+          publish_dir: ./artifact/build  # Ensure this points to the extracted build directory
+          debug: true  # Enable debugging
+          timeout: 15m  # Increase timeout
