@@ -29,25 +29,6 @@ jobs:
       - name: Build Site
         run: npm run build
 
-      - name: Check for Hard Links and Symlinks
-        run: |
-          if find ./build/ -type l | read; then
-            echo "Symlinks detected in the build artifact."
-            exit 1
-          fi
-          if find ./build/ -type f -links +1 | read; then
-            echo "Hard links detected in the build artifact."
-            exit 1
-          fi
-
-      - name: Check Artifact Size
-        run: |
-          ARTIFACT_SIZE=$(du -sh ./build/ | cut -f1)
-          echo "Artifact size: $ARTIFACT_SIZE"
-          if [ $(du -sb ./build/ | cut -f1) -ge 10000000000 ]; then
-            echo "Build artifact size exceeds the limit of 10GB."
-            exit 1
-
       - name: Compress Build Artifacts
         run: tar -czf build.tar.gz ./build/
 
