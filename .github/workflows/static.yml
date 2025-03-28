@@ -54,5 +54,3 @@ jobs:
       # Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v2
-        with:
-          path: ./build/
