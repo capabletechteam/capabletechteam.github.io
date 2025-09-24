@@ -1,8 +1,322 @@
+/* Base styles */
 body {
-    margin: 0px;
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(45deg, #1a1a1a, #2d2d2d);
+    color: #ffffff;
+    min-height: 100vh;
+    overflow-x: hidden;
 }
 
+/* Main container for the redirect experience */
+#redirect-experience {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+#stage-container {
+    width: 100%;
+    max-width: 800px;
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 15px;
+    padding: 40px;
+    margin: 20px 0;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* Progress indicator */
+#progress-indicator {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 15px;
+    border-radius: 10px;
+    border: 2px solid #72d7b6;
+}
+
+.stage-counter {
+    color: #72d7b6;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 20px;
+    background: #333;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #72d7b6, #4CAF50);
+    transition: width 0.5s ease;
+    width: 0%;
+}
+
+/* Stage-specific styles */
+.stage-title {
+    font-size: 2.5em;
+    color: #72d7b6;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.stage-message {
+    font-size: 1.2em;
+    margin: 20px 0;
+    line-height: 1.6;
+}
+
+.stage-timer {
+    font-size: 3em;
+    color: #ff6b6b;
+    font-weight: bold;
+    margin: 30px 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Progress bars for individual stages */
+.stage-progress {
+    width: 100%;
+    max-width: 500px;
+    height: 30px;
+    background: #333;
+    border-radius: 15px;
+    overflow: hidden;
+    margin: 20px 0;
+    border: 2px solid #72d7b6;
+}
+
+.stage-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #ff6b6b, #ff8e53, #72d7b6);
+    transition: width 0.3s ease;
+    width: 0%;
+}
+
+/* Buttons and interactive elements */
+.delay-button {
+    background: linear-gradient(45deg, #72d7b6, #4CAF50);
+    border: none;
+    color: white;
+    padding: 15px 30px;
+    font-size: 1.1em;
+    border-radius: 25px;
+    cursor: pointer;
+    margin: 10px;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.delay-button:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 7px 20px rgba(0, 0, 0, 0.4);
+}
+
+.delay-button:disabled {
+    background: #666;
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+/* Spinner animations */
+.spinner {
+    width: 60px;
+    height: 60px;
+    border: 6px solid #333;
+    border-top: 6px solid #72d7b6;
+    border-radius: 50%;
+    animation: spin 2s linear infinite;
+    margin: 20px 0;
+}
+
+.frozen-spinner {
+    animation-play-state: paused;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Snail animation */
+.snail-track {
+    width: 100%;
+    height: 100px;
+    background: #333;
+    border-radius: 50px;
+    position: relative;
+    overflow: hidden;
+    margin: 20px 0;
+}
+
+.snail {
+    position: absolute;
+    left: -60px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 3em;
+    animation: crawl 480s linear forwards;
+}
+
+@keyframes crawl {
+    from { left: -60px; }
+    to { left: calc(100% + 60px); }
+}
+
+/* Modal styles */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: #2d2d2d;
+    padding: 40px;
+    border-radius: 15px;
+    max-width: 500px;
+    text-align: center;
+    border: 2px solid #72d7b6;
+}
+
+/* Committee voting animation */
+.committee-member {
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    background: #72d7b6;
+    border-radius: 50%;
+    margin: 10px;
+    position: relative;
+    transition: all 0.5s ease;
+}
+
+.committee-member.voting {
+    animation: pulse 1s ease-in-out;
+}
+
+.committee-member.voted {
+    background: #4CAF50;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+/* Form styles */
+.feedback-form {
+    max-width: 400px;
+    margin: 20px 0;
+}
+
+.feedback-textarea {
+    width: 100%;
+    min-height: 120px;
+    padding: 15px;
+    border: 2px solid #72d7b6;
+    border-radius: 10px;
+    background: #333;
+    color: white;
+    font-family: inherit;
+    font-size: 1em;
+    resize: vertical;
+}
+
+.feedback-textarea:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Philosophical quotes */
+.quote {
+    font-style: italic;
+    color: #72d7b6;
+    font-size: 1.1em;
+    margin: 30px 0;
+    padding: 20px;
+    border-left: 4px solid #72d7b6;
+    background: rgba(114, 215, 182, 0.1);
+    border-radius: 0 10px 10px 0;
+}
+
+/* Easter egg styles */
+.easter-egg {
+    position: absolute;
+    background: #ff6b6b;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.8em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.easter-egg:hover {
+    transform: scale(1.1);
+    background: #ff5252;
+}
+
+/* Animations and effects */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease-out;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    #stage-container {
+        padding: 20px;
+        margin: 10px;
+    }
+    
+    .stage-title {
+        font-size: 2em;
+    }
+    
+    .stage-timer {
+        font-size: 2em;
+    }
+    
+    #progress-indicator {
+        bottom: 10px;
+        left: 10px;
+        right: 10px;
+        padding: 10px;
+    }
+}
+
+/* Legacy styles for compatibility */
 p {
     margin: 25px;
 }
