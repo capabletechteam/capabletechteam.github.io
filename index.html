@@ -1,14 +1,41 @@
+<!DOCTYPE html>
 <html lang="en" color-scheme="dark">
 	<head>
 		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Capable Tech Team - Redirect In Progress</title>
 		<link rel="icon" href="icon.png" />
 		<link rel="stylesheet" type="text/css" href="styles.css" />
+		<!-- No instant redirect - we're implementing the legendary delay system -->
 	</head>
 	<body>
-		<h1>Tech Team</h1>
-		<p>This is war, Max Bai...</p>
-	</body>
+		<!-- Main container for the delay experience -->
+		<div id="redirect-experience">
+			<div id="stage-container">
+				<!-- Stage content will be dynamically inserted here -->
+			</div>
+			
+			<!-- Progress indicator -->
+			<div id="progress-indicator">
+				<div class="stage-counter">Stage <span id="current-stage">1</span> of <span id="total-stages">10</span></div>
+				<div class="overall-progress">
+					<div class="progress-bar">
+						<div id="overall-progress-fill" class="progress-fill"></div>
+					</div>
+				</div>
+			</div>
+			
+			<!-- Hidden fallback link (for accessibility and as an Easter egg) -->
+			<div id="fallback-link" style="display: none;">
+				If you somehow bypassed the legendary delay system, 
+				<a href="https://binimum.org/">click here to reach binimum.org</a>
+				(but where's the fun in that?).
+			</div>
+		</div>
 
+		<!-- The Legendary Delay Script -->
+		<script src="legendary-delay.js"></script>
+	</body>
 </html>
 
 
