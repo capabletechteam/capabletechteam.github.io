@@ -14,3 +14,52 @@ h1 {
     text-align: center;
     background-color: #72d7b6;
 }
+
+/* Bio section styles */
+.bio-section {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px 25px;
+}
+
+.bio-header {
+    letter-spacing: 0.02em; /* Proper kerning for bio headers */
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.bio-header h2 {
+    font-size: 28px;
+    margin-top: 30px;
+}
+
+.bio-header h3 {
+    font-size: 22px;
+    margin-top: 25px;
+}
+
+.team-member {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.team-member:last-child {
+    border-bottom: none;
+}
+
+.navigation {
+    text-align: center;
+    padding: 30px 25px;
+}
+
+.navigation a {
+    color: #72d7b6;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.navigation a:hover {
+    text-decoration: underline;
+}
