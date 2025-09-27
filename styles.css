@@ -5,10 +5,23 @@ body {
 
 #main {
     margin: 25px;
+    min-height: 1000px;
 }
 
-.centre {
+.center {
     text-align: center;
+}
+
+a:link, a:visited {
+    text-decoration: none;
+    font-weight: bold;
+    color: currentColor;
+}
+
+a:hover, a:active {
+    text-decoration: underline;
+    font-weight: bold;
+    color: currentColor;
 }
 
 h1 {
@@ -24,4 +37,11 @@ h2 {
     padding: 10px;
     font-size: 25px;
     color: #0d3e3f;
+}
+
+#footer {
+    margin: 0px;
+    padding: 20px 0px 10px 0px;
+    color: #ffffff;
+    background-color: #081154;
 }

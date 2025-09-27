@@ -15,11 +15,26 @@
 			<li>Running Assemblies in the Levi Fox Hall, Gym and Chapel</li>
 			<li>Events such as plays, concerts and BricKES LEGO</li>
 		</ul>
+		<moai-icon>80</moai-icon> <moai-icon>80</moai-icon> <moai-icon>80</moai-icon>
 
-		<div class="centre">
-			<img src="assets/KES.png" alt="The logo of King Edward VI School, Stratford-Upon-Avon">
+	</div>
+	<div id="footer">
+		<div class="center">
+			<a href="http://kes.net"><img src="assets/KES.png"
+					alt="The logo of King Edward VI School, Stratford-Upon-Avon"></a>
+			<p>Website by <a href="http://19lbates.github.io">19lbates</a></p>
 		</div>
 	</div>
 </body>
+
+<script>
+	class Moai extends HTMLElement {
+		connectedCallback() {
+			var size = this.innerHTML;
+			this.innerHTML = `<img src="assets/moai.png" height="${size}">`;
+		}
+	}
+	customElements.define("moai-icon", Moai);
+</script>
 
 </html>
